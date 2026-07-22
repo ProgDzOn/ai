@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 بوابة الذكاء الاصطناعي | AI Gateway</title>
+    <meta name="description" content="بوابة شاملة لأفضل أدوات الذكاء الاصطناعي - مساعدات المحادثة ومنصات تحويل النص إلى فيديو">
+    <meta name="keywords" content="AI, ChatGPT, Gemini, Claude, DeepSeek, InVideo, Runway, ذكاء اصطناعي">
+    <meta name="author" content="AI Gateway">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        .glow-orb {
+            position: fixed;
+            width: 700px; height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 50px rgba(99, 102, 241, 0.4);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.55);
+            font-weight: 400;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 2.5rem 0 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .section-title .line {
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        }
+        .section-title .emoji {
+            font-size: 1.6rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            padding: 1.8rem 1.2rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out backwards;
+            text-align: center;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.05s; }
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.15s; }
+        .card:nth-child(4) { animation-delay: 0.2s; }
+        .card:nth-child(5) { animation-delay: 0.25s; }
+        .card:nth-child(6) { animation-delay: 0.3s; }
+        .card:nth-child(7) { animation-delay: 0.35s; }
+        .card:nth-child(8) { animation-delay: 0.4s; }
+        .card:nth-child(9) { animation-delay: 0.45s; }
+        .card:nth-child(10) { animation-delay: 0.5s; }
+        .card:nth-child(11) { animation-delay: 0.55s; }
+        .card:nth-child(12) { animation-delay: 0.6s; }
+        .card:nth-child(13) { animation-delay: 0.65s; }
+        .card:nth-child(14) { animation-delay: 0.7s; }
+        .card:nth-child(15) { animation-delay: 0.75s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transition: left 0.6s ease;
+        }
+        .card:hover::before { left: 100%; }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Chat Assistants Colors */
+        .card.kimi    { border-top: 3px solid #6366f1; }
+        .card.kimi:hover    { box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2); }
+        .card.chatgpt { border-top: 3px solid #10a37f; }
+        .card.chatgpt:hover { box-shadow: 0 25px 50px rgba(16, 163, 127, 0.2); }
+        .card.deepseek{ border-top: 3px solid #2563eb; }
+        .card.deepseek:hover{ box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2); }
+        .card.claude  { border-top: 3px solid #d97757; }
+        .card.claude:hover  { box-shadow: 0 25px 50px rgba(217, 119, 87, 0.2); }
+        .card.gemini  { border-top: 3px solid #4285f4; }
+        .card.gemini:hover  { box-shadow: 0 25px 50px rgba(66, 133, 244, 0.2); }
+        .card.perplexity { border-top: 3px solid #22c55e; }
+        .card.perplexity:hover { box-shadow: 0 25px 50px rgba(34, 197, 94, 0.2); }
+        .card.copilot { border-top: 3px solid #0ea5e9; }
+        .card.copilot:hover { box-shadow: 0 25px 50px rgba(14, 165, 233, 0.2); }
+        .card.grok    { border-top: 3px solid #ef4444; }
+        .card.grok:hover    { box-shadow: 0 25px 50px rgba(239, 68, 68, 0.2); }
+
+        .card.veo     { border-top: 3px solid #8b5cf6; }
+        .card.veo:hover     { box-shadow: 0 25px 50px rgba(139, 92, 246, 0.2); }
+        .card.invideo { border-top: 3px solid #f59e0b; }
+        .card.invideo:hover { box-shadow: 0 25px 50px rgba(245, 158, 11, 0.2); }
+        .card.pika    { border-top: 3px solid #ec4899; }
+        .card.pika:hover    { box-shadow: 0 25px 50px rgba(236, 72, 153, 0.2); }
+        .card.runway  { border-top: 3px solid #3b82f6; }
+        .card.runway:hover  { box-shadow: 0 25px 50px rgba(59, 130, 246, 0.2); }
+        .card.heygen  { border-top: 3px solid #06b6d4; }
+        .card.heygen:hover  { box-shadow: 0 25px 50px rgba(6, 182, 212, 0.2); }
+        .card.synthesia { border-top: 3px solid #8b5cf6; }
+        .card.synthesia:hover { box-shadow: 0 25px 50px rgba(139, 92, 246, 0.2); }
+        .card.lumen5  { border-top: 3px solid #22c55e; }
+        .card.lumen5:hover  { box-shadow: 0 25px 50px rgba(34, 197, 94, 0.2); }
+
+        .card-icon {
+            width: 55px; height: 55px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.6rem;
+            font-weight: 900;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card.kimi .card-icon     { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
+        .card.chatgpt .card-icon  { background: linear-gradient(135deg, #10a37f, #19c59f); color: white; }
+        .card.deepseek .card-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); color: white; }
+        .card.claude .card-icon   { background: linear-gradient(135deg, #d97757, #f4a261); color: white; }
+        .card.gemini .card-icon   { background: linear-gradient(135deg, #4285f4, #34a853); color: white; }
+        .card.perplexity .card-icon { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+        .card.copilot .card-icon  { background: linear-gradient(135deg, #0ea5e9, #06b6d4); color: white; }
+        .card.grok .card-icon     { background: linear-gradient(135deg, #ef4444, #f97316); color: white; }
+
+        .card.veo .card-icon      { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
+        .card.invideo .card-icon  { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+        .card.pika .card-icon     { background: linear-gradient(135deg, #ec4899, #db2777); color: white; }
+        .card.runway .card-icon   { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; }
+        .card.heygen .card-icon   { background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; }
+        .card.synthesia .card-icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; }
+        .card.lumen5 .card-icon   { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+
+        .card .rating {
+            display: inline-block;
+            font-size: 0.7rem;
+            color: #fbbf24;
+            letter-spacing: 1px;
+            margin-top: 0.2rem;
+        }
+
+        .card h2 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+        .card .company {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.7rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .card p {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.78rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .card .btn-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .card:hover .btn-text {
+            color: #ffffff;
+            gap: 0.8rem;
+        }
+        .card .btn-text svg {
+            width: 16px; height: 16px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover .btn-text svg { transform: translateX(-5px); }
+
+        .status {
+            position: absolute;
+            top: 0.8rem; left: 0.8rem;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .details-btn, .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+        .details-btn:hover, .github-btn:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            border-color: rgba(255,255,255,0.3);
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        .details-btn svg, .github-btn svg {
+            width: 20px; height: 20px;
+        }
+
+        .details-btn {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.1));
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+        .details-btn:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.2));
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .github-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        .github-btn:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer {
+            margin-top: 2.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+        .footer a {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .cards-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+            .card { padding: 1.2rem 0.8rem; }
+            .card h2 { font-size: 0.95rem; }
+            .card p { font-size: 0.7rem; }
+            .card-icon { width: 45px; height: 45px; font-size: 1.3rem; }
+            .section-title { font-size: 0.95rem; }
+        }
+
+        @media (max-width: 480px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; align-items: center; }
+            .details-btn, .github-btn { width: 100%; justify-content: center; }
+        }
+
+        .deco-circle {
+            position: fixed;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            z-index: 0;
+            animation: rotate 30s linear infinite;
+        }
+        .deco-1 { width: 300px; height: 300px; top: 10%; right: 5%; }
+        .deco-2 { width: 200px; height: 200px; bottom: 15%; left: 8%; animation-direction: reverse; animation-duration: 25s; }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="glow-orb"></div>
+    <div class="deco-circle deco-1"></div>
+    <div class="deco-circle deco-2"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🤖 بوابة الذكاء الاصطناعي</h1>
+            <p class="subtitle">جميع أدوات الذكاء الاصطناعي في مكان واحد - اختر وابدأ</p>
+        </div>
+
+        <!-- SECTION 1: AI CHAT ASSISTANTS -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">💬</span>
+            <span>مساعدات المحادثة</span>
+            <span class="line"></span>
+        </div>
+
+        <div class="cards-grid">
+            <a href="https://www.kimi.com/?chat_enter_method=new_chat" target="_blank" class="card kimi">
+                <div class="status"></div>
+                <div class="card-icon">🌙</div>
+                <h2>Kimi</h2>
+                <span class="company">Moonshot AI</span>
+                <p>معالجة مستندات طويلة</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://chatgpt.com/" target="_blank" class="card chatgpt">
+                <div class="status"></div>
+                <div class="card-icon">💬</div>
+                <h2>ChatGPT</h2>
+                <span class="company">OpenAI</span>
+                <p>محادثات ذكية + DALL-E</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://chat.deepseek.com/" target="_blank" class="card deepseek">
+                <div class="status"></div>
+                <div class="card-icon">🐋</div>
+                <h2>DeepSeek</h2>
+                <span class="company">DeepSeek AI</span>
+                <p>تفكير عميق R1</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://claude.ai/" target="_blank" class="card claude">
+                <div class="status"></div>
+                <div class="card-icon">🎭</div>
+                <h2>Claude</h2>
+                <span class="company">Anthropic</span>
+                <p>أفضل كتابة + 200K</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://gemini.google.com/" target="_blank" class="card gemini">
+                <div class="status"></div>
+                <div class="card-icon">✨</div>
+                <h2>Gemini</h2>
+                <span class="company">Google</span>
+                <p>مليون توكن سياق</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://www.perplexity.ai/" target="_blank" class="card perplexity">
+                <div class="status"></div>
+                <div class="card-icon">🔍</div>
+                <h2>Perplexity</h2>
+                <span class="company">Perplexity AI</span>
+                <p>بحث ذكي باقتباسات</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://copilot.microsoft.com/" target="_blank" class="card copilot">
+                <div class="status"></div>
+                <div class="card-icon">🛡️</div>
+                <h2>Copilot</h2>
+                <span class="company">Microsoft</span>
+                <p>تكامل 365 + Bing</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://grok.com/" target="_blank" class="card grok">
+                <div class="status"></div>
+                <div class="card-icon">🚀</div>
+                <h2>Grok</h2>
+                <span class="company">xAI</span>
+                <p>بيانات X مباشرة</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+        </div>
+
+        <!-- SECTION 2: VIDEO GENERATION -->
+        <div class="section-title">
+            <span class="line"></span>
+            <span class="emoji">🎬</span>
+            <span>تحويل النص إلى فيديو</span>
+            <span class="line"></span>
+        </div>
+
+        <div class="cards-grid">
+            <a href="https://deepmind.google/technologies/veo/" target="_blank" class="card veo">
+                <div class="status"></div>
+                <div class="card-icon">🎥</div>
+                <h2>Google Flow (Veo)</h2>
+                <span class="company">Google DeepMind</span>
+                <span class="rating">⭐⭐⭐⭐⭐</span>
+                <p>أفضل جودة سينمائية</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://invideo.io/" target="_blank" class="card invideo">
+                <div class="status"></div>
+                <div class="card-icon">🎞️</div>
+                <h2>InVideo AI</h2>
+                <span class="company">InVideo</span>
+                <span class="rating">⭐⭐⭐⭐⭐</span>
+                <p>أسهل أداة للمبتدئين</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://pika.art/" target="_blank" class="card pika">
+                <div class="status"></div>
+                <div class="card-icon">✨</div>
+                <h2>Pika</h2>
+                <span class="company">Pika Labs</span>
+                <span class="rating">⭐⭐⭐⭐☆</span>
+                <p>مؤثرات بصرية جميلة</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://runwayml.com/" target="_blank" class="card runway">
+                <div class="status"></div>
+                <div class="card-icon">🎬</div>
+                <h2>Runway</h2>
+                <span class="company">Runway AI</span>
+                <span class="rating">⭐⭐⭐⭐⭐</span>
+                <p>إنتاج احترافي</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://www.heygen.com/" target="_blank" class="card heygen">
+                <div class="status"></div>
+                <div class="card-icon">🧑‍🏫</div>
+                <h2>HeyGen</h2>
+                <span class="company">HeyGen</span>
+                <span class="rating">⭐⭐⭐⭐⭐</span>
+                <p>مقدم افتراضي بالعربية</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://www.synthesia.io/" target="_blank" class="card synthesia">
+                <div class="status"></div>
+                <div class="card-icon">🤖</div>
+                <h2>Synthesia</h2>
+                <span class="company">Synthesia</span>
+                <span class="rating">⭐⭐⭐⭐⭐</span>
+                <p>شخصيات افتراضية</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+
+            <a href="https://lumen5.com/" target="_blank" class="card lumen5">
+                <div class="status"></div>
+                <div class="card-icon">📰</div>
+                <h2>Lumen5</h2>
+                <span class="company">Lumen5</span>
+                <span class="rating">⭐⭐⭐⭐☆</span>
+                <p>تحويل مقالات لفيديو</p>
+                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+            </a>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="btn-group">
+            <a href="ai-details.html" class="details-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                📖 شرح تفصيلي لكل أداة
+            </a>
+            <a href="https://github.com/your-username/ai-gateway" target="_blank" class="github-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                ⭐ Star on GitHub
+            </a>
+        </div>
+
+        <div class="footer">
+            اضغط على أي بطاقة للانتقال إلى الموقع • جميع الروابط تفتح في نافذة جديدة<br>
+            <a href="https://github.com/your-username/ai-gateway" target="_blank">مشروع مفتوح المصدر</a> • آخر تحديث: يوليو 2026
+        </div>
+    </div>
+
+    <script>
+        // Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.width = (Math.random() * 3 + 1) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+
+        // Mouse parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.card');
+            const x = (window.innerWidth / 2 - e.pageX) / 60;
+            const y = (window.innerHeight / 2 - e.pageY) / 60;
+            cards.forEach((card, index) => {
+                const factor = (index + 1) * 0.3;
+                card.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

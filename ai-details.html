@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 شرح المواقع | AI Gateway Details</title>
+    <meta name="description" content="شرح تفصيلي لجميع أدوات الذكاء الاصطناعي - مساعدات المحادثة ومنصات الفيديو">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            width: 3px; height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 2rem 0 1.5rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: rgba(255,255,255,0.55);
+            font-size: 1.1rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 0.7rem 1.5rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.15);
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+        .back-btn svg {
+            width: 18px; height: 18px;
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0 1.5rem;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+        }
+        .section-divider .emoji { font-size: 1.8rem; }
+        .section-divider h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.9);
+        }
+        .section-divider .badge {
+            margin-right: auto;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out backwards;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-card:nth-child(1) { animation-delay: 0.1s; }
+        .detail-card:nth-child(2) { animation-delay: 0.15s; }
+        .detail-card:nth-child(3) { animation-delay: 0.2s; }
+        .detail-card:nth-child(4) { animation-delay: 0.25s; }
+        .detail-card:nth-child(5) { animation-delay: 0.3s; }
+        .detail-card:nth-child(6) { animation-delay: 0.35s; }
+        .detail-card:nth-child(7) { animation-delay: 0.4s; }
+        .detail-card:nth-child(8) { animation-delay: 0.45s; }
+        .detail-card:nth-child(9) { animation-delay: 0.5s; }
+        .detail-card:nth-child(10) { animation-delay: 0.55s; }
+        .detail-card:nth-child(11) { animation-delay: 0.6s; }
+        .detail-card:nth-child(12) { animation-delay: 0.65s; }
+        .detail-card:nth-child(13) { animation-delay: 0.7s; }
+        .detail-card:nth-child(14) { animation-delay: 0.75s; }
+        .detail-card:nth-child(15) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-card:hover {
+            border-color: rgba(255,255,255,0.2);
+            transform: translateX(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Chat Assistants Colors */
+        .detail-card.kimi    { border-right: 4px solid #6366f1; }
+        .detail-card.chatgpt { border-right: 4px solid #10a37f; }
+        .detail-card.deepseek{ border-right: 4px solid #2563eb; }
+        .detail-card.claude  { border-right: 4px solid #d97757; }
+        .detail-card.gemini  { border-right: 4px solid #4285f4; }
+        .detail-card.perplexity { border-right: 4px solid #22c55e; }
+        .detail-card.copilot { border-right: 4px solid #0ea5e9; }
+        .detail-card.grok    { border-right: 4px solid #ef4444; }
+
+        /* Video Generators Colors */
+        .detail-card.veo     { border-right: 4px solid #8b5cf6; }
+        .detail-card.invideo { border-right: 4px solid #f59e0b; }
+        .detail-card.pika    { border-right: 4px solid #ec4899; }
+        .detail-card.runway  { border-right: 4px solid #3b82f6; }
+        .detail-card.heygen  { border-right: 4px solid #06b6d4; }
+        .detail-card.synthesia { border-right: 4px solid #8b5cf6; }
+        .detail-card.lumen5  { border-right: 4px solid #22c55e; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .card-header .icon {
+            width: 55px; height: 55px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        .kimi .icon     { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .chatgpt .icon  { background: linear-gradient(135deg, #10a37f, #19c59f); }
+        .deepseek .icon { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+        .claude .icon   { background: linear-gradient(135deg, #d97757, #f4a261); }
+        .gemini .icon   { background: linear-gradient(135deg, #4285f4, #34a853); }
+        .perplexity .icon { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .copilot .icon  { background: linear-gradient(135deg, #0ea5e9, #06b6d4); }
+        .grok .icon     { background: linear-gradient(135deg, #ef4444, #f97316); }
+        .veo .icon      { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+        .invideo .icon  { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .pika .icon     { background: linear-gradient(135deg, #ec4899, #db2777); }
+        .runway .icon   { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .heygen .icon   { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .synthesia .icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .lumen5 .icon   { background: linear-gradient(135deg, #22c55e, #16a34a); }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .card-header .company {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 400;
+        }
+        .rating {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 0.15rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #fbbf24;
+            margin-right: 0.5rem;
+            font-weight: 600;
+        }
+
+        .description {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .feature-tag {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+            transition: all 0.3s ease;
+        }
+        .feature-tag:hover {
+            background: rgba(255,255,255,0.15);
+            color: #ffffff;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .pricing {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+        .pricing .free { color: #22c55e; font-weight: 600; }
+        .pricing .paid { color: #f59e0b; font-weight: 600; }
+
+        .visit-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .visit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .kimi .visit-btn     { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
+        .chatgpt .visit-btn  { background: linear-gradient(135deg, #10a37f, #19c59f); color: white; }
+        .deepseek .visit-btn { background: linear-gradient(135deg, #2563eb, #3b82f6); color: white; }
+        .claude .visit-btn   { background: linear-gradient(135deg, #d97757, #f4a261); color: white; }
+        .gemini .visit-btn   { background: linear-gradient(135deg, #4285f4, #34a853); color: white; }
+        .perplexity .visit-btn { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+        .copilot .visit-btn  { background: linear-gradient(135deg, #0ea5e9, #06b6d4); color: white; }
+        .grok .visit-btn     { background: linear-gradient(135deg, #ef4444, #f97316); color: white; }
+        .veo .visit-btn      { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
+        .invideo .visit-btn  { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+        .pika .visit-btn     { background: linear-gradient(135deg, #ec4899, #db2777); color: white; }
+        .runway .visit-btn   { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; }
+        .heygen .visit-btn   { background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; }
+        .synthesia .visit-btn { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; }
+        .lumen5 .visit-btn   { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+
+        .visit-btn svg { width: 16px; height: 16px; }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            color: rgba(255,255,255,0.25);
+            font-size: 0.85rem;
+        }
+        .footer a {
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover { color: rgba(255,255,255,0.6); }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 1.8rem; }
+            .detail-card { padding: 1.5rem; }
+            .card-header { flex-direction: column; text-align: center; }
+            .card-footer { flex-direction: column; text-align: center; }
+            .section-divider { flex-wrap: wrap; justify-content: center; text-align: center; }
+            .section-divider .badge { margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            العودة للصفحة الرئيسية
+        </a>
+
+        <div class="page-header">
+            <h1>📖 دليل مساعدي الذكاء الاصطناعي</h1>
+            <p>تعرف على كل أداة بالتفصيل واختر الأنسب لاحتياجاتك</p>
+        </div>
+
+        <!-- SECTION 1: CHAT ASSISTANTS -->
+        <div class="section-divider">
+            <span class="emoji">💬</span>
+            <h3>مساعدات المحادثة الذكية</h3>
+            <span class="badge">8 أدوات</span>
+        </div>
+
+        <!-- (Cards for each chat assistant - same as before) -->
+        <!-- Kimi -->
+        <div class="detail-card kimi">
+            <div class="card-header">
+                <div class="icon">🌙</div>
+                <div>
+                    <h2>Kimi</h2>
+                    <span class="company">Moonshot AI (الصين)</span>
+                </div>
+            </div>
+            <p class="description">
+                مساعد ذكي صيني يتميز بقدرته الفائقة على معالجة المستندات الطويلة جداً (يصل إلى مليوني حرف). يدعم تحليل ملفات PDF وWord وExcel وPowerPoint بكفاءة عالية. يعتمد على نموذج MoE (Mixture of Experts) مع 1 تريليون معامل. يتميز بسرعة الاستجابة ودقة الإجابات في المواضيع التقنية والأكاديمية.
+            </p>
+            <div class="features">
+                <span class="feature-tag">📄 معالجة ملفات طويلة</span>
+                <span class="feature-tag">🔍 بحث ويب مدمج</span>
+                <span class="feature-tag">🖼️ تحليل الصور</span>
+                <span class="feature-tag">💻 برمجة</span>
+                <span class="feature-tag">🌐 متعدد اللغات</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني</span> | Pro مدفوع</span>
+                <a href="https://www.kimi.com/?chat_enter_method=new_chat" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- ChatGPT -->
+        <div class="detail-card chatgpt">
+            <div class="card-header">
+                <div class="icon">💬</div>
+                <div>
+                    <h2>ChatGPT</h2>
+                    <span class="company">OpenAI (الولايات المتحدة)</span>
+                </div>
+            </div>
+            <p class="description">
+                أشهر مساعد ذكاء اصطناعي في العالم، يعتمد على نماذج GPT-4o وo3. يدعم المحادثات النصية والصوتية والصورية. يمكنه إنشاء الصور عبر DALL-E 3، وتحليل الملفات، وكتابة الأكواد البرمجية. يتميز بأداء متوازن في معظم المجالات مع تكامل ممتاز مع أدوات الإنتاجية.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🎨 إنشاء صور (DALL-E)</span>
+                <span class="feature-tag">🎙️ محادثة صوتية</span>
+                <span class="feature-tag">📁 تحليل ملفات</span>
+                <span class="feature-tag">💻 برمجة</span>
+                <span class="feature-tag">🔌 GPTs مخصصة</span>
+                <span class="feature-tag">🧠 Reasoning (o3)</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني</span> | Plus $20/شهر | Pro $200/شهر</span>
+                <a href="https://chatgpt.com/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- DeepSeek -->
+        <div class="detail-card deepseek">
+            <div class="card-header">
+                <div class="icon">🐋</div>
+                <div>
+                    <h2>DeepSeek</h2>
+                    <span class="company">DeepSeek AI (الصين)</span>
+                </div>
+            </div>
+            <p class="description">
+                نموذج R1 يتميز بقدرات التفكير العميق (Reasoning) المتقدمة التي تنافس أفضل النماذج العالمية بكسر تكلفة. ممتاز في الرياضيات والبرمجة والمنطق المعقد. يستخدم تقنية RL (Reinforcement Learning) بدون SFT. يدعم معالجة السياقات الطويلة ويقدم أداءً استثنائياً في المهام التحليلية المعقدة.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🧠 تفكير عميق (R1)</span>
+                <span class="feature-tag">💻 برمجة متقدمة</span>
+                <span class="feature-tag">📐 رياضيات</span>
+                <span class="feature-tag">🔍 بحث ويب</span>
+                <span class="feature-tag">💰 تكلفة منخفضة</span>
+                <span class="feature-tag">📄 سياق طويل</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني</span> | API مدفوع رخيص</span>
+                <a href="https://chat.deepseek.com/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Claude -->
+        <div class="detail-card claude">
+            <div class="card-header">
+                <div class="icon">🎭</div>
+                <div>
+                    <h2>Claude</h2>
+                    <span class="company">Anthropic (الولايات المتحدة)</span>
+                </div>
+            </div>
+            <p class="description">
+                يُعتبر الأفضل في جودة الكتابة والتحليل النقدي. يدعم سياقاً ضخماً يصل إلى 200 ألف توكن (نحو 500 صفحة). يتميز بأمان عالي و"دستور" أخلاقي صارم. يقدم Claude Code لمساعدة المطورين في البرمجة المتقدمة. يتفوق في المهام الإبداعية والأكاديمية والتحليل المعمق للنصوص الطويلة.
+            </p>
+            <div class="features">
+                <span class="feature-tag">✍️ أفضل جودة كتابة</span>
+                <span class="feature-tag">📚 سياق 200K توكن</span>
+                <span class="feature-tag">💻 Claude Code</span>
+                <span class="feature-tag">🛡️ أمان عالي</span>
+                <span class="feature-tag">🎨 إبداعي</span>
+                <span class="feature-tag">📄 تحليل مستندات</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني</span> | Pro $20/شهر | Max $100-200/شهر</span>
+                <a href="https://claude.ai/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Gemini -->
+        <div class="detail-card gemini">
+            <div class="card-header">
+                <div class="icon">✨</div>
+                <div>
+                    <h2>Gemini</h2>
+                    <span class="company">Google (الولايات المتحدة)</span>
+                </div>
+            </div>
+            <p class="description">
+                نموذج Google المتقدم يدعم سياقاً هائلاً يصل إلى مليون توكن (نحو 1500 صفحة). متكامل بشكل كامل مع Google Workspace (Gmail, Docs, Sheets). يدعم إنشاء الفيديو عبر Veo 3 وإنشاء الصور عبر Imagen 3. يتميز بالسرعة العالية والدقة في المعلومات الحديثة بفضل تكامله مع بحث Google.
+            </p>
+            <div class="features">
+                <span class="feature-tag">📊 مليون توكن سياق</span>
+                <span class="feature-tag">🎬 إنشاء فيديو (Veo)</span>
+                <span class="feature-tag">🖼️ إنشاء صور (Imagen)</span>
+                <span class="feature-tag">🔍 تكامل Google Search</span>
+                <span class="feature-tag">📧 Gmail & Workspace</span>
+                <span class="feature-tag">⚡ سرعة عالية</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني</span> | Advanced $20/شهر</span>
+                <a href="https://gemini.google.com/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Perplexity -->
+        <div class="detail-card perplexity">
+            <div class="card-header">
+                <div class="icon">🔍</div>
+                <div>
+                    <h2>Perplexity</h2>
+                    <span class="company">Perplexity AI (الولايات المتحدة)</span>
+                </div>
+            </div>
+            <p class="description">
+                محرك بحث ذكي يجمع بين قوة البحث على الإنترنت والذكاء الاصطناعي. يقدم إجابات مع اقتباسات قابلة للنقر من مصادر موثوقة. يدعم Pro Search للبحث المتقدم وModel Council لمقارنة إجابات نماذج مختلفة (GPT-4, Claude, Gemini). مثالي للبحث الأكاديمي والصحفي والتحقق من المعلومات.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🔗 اقتباسات قابلة للنقر</span>
+                <span class="feature-tag">🔍 Pro Search</span>
+                <span class="feature-tag">⚖️ Model Council</span>
+                <span class="feature-tag">📚 بحث أكاديمي</span>
+                <span class="feature-tag">📰 تحقق من الأخبار</span>
+                <span class="feature-tag">🌐 مصادر متعددة</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني</span> | Pro $20/شهر</span>
+                <a href="https://www.perplexity.ai/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Copilot -->
+        <div class="detail-card copilot">
+            <div class="card-header">
+                <div class="icon">🛡️</div>
+                <div>
+                    <h2>Copilot</h2>
+                    <span class="company">Microsoft (الولايات المتحدة)</span>
+                </div>
+            </div>
+            <p class="description">
+                مساعد AI متكامل مع نظام Microsoft بالكامل. يعمل داخل Windows 11، Microsoft 365، Edge، وBing. يدعم وكلاء متعددين (Multi-Agent) للمهام المعقدة. يمكنه إنشاء عروض PowerPoint وتحليل بيانات Excel وكتابة رسائل Outlook. يعتمد على نماذج GPT-4o وo1 من OpenAI مع تكامل Microsoft الخاص.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🪟 تكامل Windows 11</span>
+                <span class="feature-tag">📊 Excel & PowerPoint</span>
+                <span class="feature-tag">🌐 Edge & Bing</span>
+                <span class="feature-tag">🤖 وكلاء متعددين</span>
+                <span class="feature-tag">📧 Outlook</span>
+                <span class="feature-tag">🏢 للشركات</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني</span> | Pro $20/شهر | 365 $30/شهر</span>
+                <a href="https://copilot.microsoft.com/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Grok -->
+        <div class="detail-card grok">
+            <div class="card-header">
+                <div class="icon">🚀</div>
+                <div>
+                    <h2>Grok</h2>
+                    <span class="company">xAI - Elon Musk (الولايات المتحدة)</span>
+                </div>
+            </div>
+            <p class="description">
+                مساعد AI من Elon Musk يتميز بالوصول المباشر لبيانات منصة X (تويتر) في الوقت الفعلي. يقدم إجابات جريئة وغير محجوبة مع "وضع المرح" (Fun Mode). يدعم إنشاء الصور السينمائية عبر Imagine. يتميز بسرعة الاستجابة والقدرة على مناقشة المواضيع المثيرة للجدل بصراحة. يعتمد على نموذج Grok-2 المتقدم.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🐦 بيانات X مباشرة</span>
+                <span class="feature-tag">😄 وضع المرح</span>
+                <span class="feature-tag">🎨 Imagine للصور</span>
+                <span class="feature-tag">⚡ سرعة عالية</span>
+                <span class="feature-tag">🔓 إجابات جريئة</span>
+                <span class="feature-tag">🌐 أخبار لحظية</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني</span> | Premium $8/شهر | SuperGrok $40/شهر</span>
+                <a href="https://grok.com/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- SECTION 2: VIDEO GENERATORS -->
+        <div class="section-divider">
+            <span class="emoji">🎬</span>
+            <h3>منصات تحويل النص إلى فيديو</h3>
+            <span class="badge">7 أدوات</span>
+        </div>
+
+        <!-- Veo -->
+        <div class="detail-card veo">
+            <div class="card-header">
+                <div class="icon">🎥</div>
+                <div>
+                    <h2>Google Flow (Veo) <span class="rating">⭐⭐⭐⭐⭐</span></h2>
+                    <span class="company">Google DeepMind</span>
+                </div>
+            </div>
+            <p class="description">
+                <strong>أفضل جودة في السوق.</strong> يحول النص إلى فيديو سينمائي بجودة عالية جداً. يدعم إنشاء مشاهد واقعية مع دقة استثنائية في التفاصيل والحركة. مثالي للمحتوى التعليمي والتقني والإعلانات الاحترافية. يعتمد على نموذج Veo المتقدم من Google DeepMind.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🎬 جودة سينمائية</span>
+                <span class="feature-tag">🎭 مشاهد واقعية</span>
+                <span class="feature-tag">📚 تعليمي وتقني</span>
+                <span class="feature-tag">🌐 متكامل مع Gemini</span>
+                <span class="feature-tag">⚡ دقة عالية</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني (محدود)</span> | <span class="paid">مدفوع للاستخدام التجاري</span></span>
+                <a href="https://deepmind.google/technologies/veo/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- InVideo -->
+        <div class="detail-card invideo">
+            <div class="card-header">
+                <div class="icon">🎞️</div>
+                <div>
+                    <h2>InVideo AI <span class="rating">⭐⭐⭐⭐⭐</span></h2>
+                    <span class="company">InVideo</span>
+                </div>
+            </div>
+            <p class="description">
+                <strong>الأسهل والأسرع للمبتدئين.</strong> فقط اكتب فكرة أو سيناريو وسينشئ الفيديو بالكامل تلقائياً: يضيف التعليق الصوتي، ويختار الصور ومقاطع الفيديو المناسبة، ويضيف العناوين والموسيقى. يدعم اللغة العربية بشكل ممتاز. مثالي لصناع المحتوى على يوتيوب ومنصات التواصل الاجتماعي.
+            </p>
+            <div class="features">
+                <span class="feature-tag">📝 كتابة سيناريو تلقائي</span>
+                <span class="feature-tag">🎙️ تعليق صوتي بالعربية</span>
+                <span class="feature-tag">🖼️ اختيار صور وفيديوهات</span>
+                <span class="feature-tag">🎵 موسيقى خلفية</span>
+                <span class="feature-tag">📱 مناسب للسوشيال ميديا</span>
+                <span class="feature-tag">🇸🇦 دعم العربية</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني (مع علامة مائية)</span> | <span class="paid">Business $30/شهر</span></span>
+                <a href="https://invideo.io/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Pika -->
+        <div class="detail-card pika">
+            <div class="card-header">
+                <div class="icon">✨</div>
+                <div>
+                    <h2>Pika <span class="rating">⭐⭐⭐⭐☆</span></h2>
+                    <span class="company">Pika Labs</span>
+                </div>
+            </div>
+            <p class="description">
+                يحول النص إلى فيديو مع مؤثرات بصرية جميلة وإبداعية. مناسب جداً للمحتوى القصير والسريع مثل مقاطع TikTok وReels وShorts. يتميز بسهولة الاستخدام وسرعة الإنتاج مع جودة بصرية لافتة. يدعم أنماطاً فنية متعددة.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🎨 مؤثرات بصرية</span>
+                <span class="feature-tag">📱 محتوى قصير</span>
+                <span class="feature-tag">⚡ إنتاج سريع</span>
+                <span class="feature-tag">🎭 أنماط فنية</span>
+                <span class="feature-tag">🔄 تحديثات مستمرة</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني (محدود)</span> | <span class="paid">Pro $10/شهر</span></span>
+                <a href="https://pika.art/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Runway -->
+        <div class="detail-card runway">
+            <div class="card-header">
+                <div class="icon">🎬</div>
+                <div>
+                    <h2>Runway <span class="rating">⭐⭐⭐⭐⭐</span></h2>
+                    <span class="company">Runway AI</span>
+                </div>
+            </div>
+            <p class="description">
+                <strong>من أقوى أدوات إنشاء الفيديو بالذكاء الاصطناعي.</strong> مناسب للإعلانات والفيديوهات الاحترافية. يدعم تحويل النص إلى فيديو، وإزالة الخلفيات، وتوليد الحركة، والعديد من الميزات المتقدمة. يستخدمه صناع الأفلام والمصممون المحترفون حول العالم.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🎬 إنتاج احترافي</span>
+                <span class="feature-tag">🖼️ إزالة خلفيات</span>
+                <span class="feature-tag">🎭 توليد حركة</span>
+                <span class="feature-tag">📢 إعلانات</span>
+                <span class="feature-tag">🎞️ Gen-2 / Gen-3</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني (محدود)</span> | <span class="paid">Pro $15/شهر</span></span>
+                <a href="https://runwayml.com/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- HeyGen -->
+        <div class="detail-card heygen">
+            <div class="card-header">
+                <div class="icon">🧑‍🏫</div>
+                <div>
+                    <h2>HeyGen <span class="rating">⭐⭐⭐⭐⭐</span></h2>
+                    <span class="company">HeyGen</span>
+                </div>
+            </div>
+            <p class="description">
+                يضيف مقدماً افتراضياً (Avatar) احترافياً يتحدث النص الذي تكتبه. يدعم التعليق الصوتي بالعربية بجودة عالية. مثالي جداً للدروس التعليمية والشروحات والعروض التقديمية. يمكنك اختيار شخصية افتراضية أو تحميل صورتك لإنشاء نسخة رقمية منك.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🧑‍💼 مقدم افتراضي</span>
+                <span class="feature-tag">🎙️ تعليق صوتي بالعربية</span>
+                <span class="feature-tag">📚 دروس وشروحات</span>
+                <span class="feature-tag">🔄 ترجمة فورية</span>
+                <span class="feature-tag">👤 Avatar مخصص</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني (محدود)</span> | <span class="paid">Creator $29/شهر</span></span>
+                <a href="https://www.heygen.com/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Synthesia -->
+        <div class="detail-card synthesia">
+            <div class="card-header">
+                <div class="icon">🤖</div>
+                <div>
+                    <h2>Synthesia <span class="rating">⭐⭐⭐⭐⭐</span></h2>
+                    <span class="company">Synthesia</span>
+                </div>
+            </div>
+            <p class="description">
+                <strong>ممتاز للفيديوهات التعليمية والتدريبية.</strong> يقدم شخصيات افتراضية احترافية بأكثر من 120 لغة بما فيها العربية. يمكنك إنشاء فيديوهات احترافية في دقائق دون الحاجة إلى كاميرا أو استوديو. يستخدمه أكبر الشركات العالمية للتدريب والتواصل الداخلي.
+            </p>
+            <div class="features">
+                <span class="feature-tag">🧑‍🏫 شخصيات افتراضية</span>
+                <span class="feature-tag">🌐 120+ لغة</span>
+                <span class="feature-tag">🇸🇦 دعم العربية</span>
+                <span class="feature-tag">🏢 للشركات</span>
+                <span class="feature-tag">📚 تعليمي وتدريبي</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="paid">Starter $29/شهر</span> | Pro $89/شهر</span>
+                <a href="https://www.synthesia.io/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Lumen5 -->
+        <div class="detail-card lumen5">
+            <div class="card-header">
+                <div class="icon">📰</div>
+                <div>
+                    <h2>Lumen5 <span class="rating">⭐⭐⭐⭐☆</span></h2>
+                    <span class="company">Lumen5</span>
+                </div>
+            </div>
+            <p class="description">
+                يحول المقالات والنصوص الطويلة إلى فيديوهات قصيرة وجذابة. سهل الاستخدام جداً، مناسب لمنشورات وسائل التواصل الاجتماعي والمدونات. يقوم تلقائياً باستخراج النقاط الرئيسية من النص وتحويلها إلى مشاهد مرئية مع تعليق صوتي وموسيقى.
+            </p>
+            <div class="features">
+                <span class="feature-tag">📄 تحويل مقالات لفيديو</span>
+                <span class="feature-tag">📱 سوشيال ميديا</span>
+                <span class="feature-tag">🎵 موسيقى تلقائية</span>
+                <span class="feature-tag">🎙️ تعليق صوتي</span>
+                <span class="feature-tag">🖼️ مكتبة وسائط</span>
+            </div>
+            <div class="card-footer">
+                <span class="pricing">السعر: <span class="free">مجاني (مع علامة مائية)</span> | <span class="paid">Pro $29/شهر</span></span>
+                <a href="https://lumen5.com/" target="_blank" class="visit-btn">
+                    زيارة الموقع
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recommendation Card -->
+        <div class="detail-card" style="border-right: 4px solid #fbbf24; background: rgba(251, 191, 36, 0.08);">
+            <div class="card-header">
+                <div class="icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">🏆</div>
+                <div>
+                    <h2>توصيتي لك</h2>
+                    <span class="company">بناءً على موضوعك: تعلم البرمجة بالذكاء الاصطناعي</span>
+                </div>
+            </div>
+            <p class="description" style="font-size: 1.05rem;">
+                بما أن موضوعك هو <strong>تعلم البرمجة بالذكاء الاصطناعي</strong>، أنصحك بهذا الترتيب:
+            </p>
+            <div class="features" style="margin-bottom: 0.5rem;">
+                <span class="feature-tag" style="background: rgba(245, 158, 11, 0.2); border-color: #f59e0b; color: #fbbf24;">🥇 InVideo AI</span>
+                <span class="feature-tag" style="background: rgba(139, 92, 246, 0.2); border-color: #8b5cf6; color: #a78bfa;">🥈 Google Flow (Veo)</span>
+                <span class="feature-tag" style="background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; color: #60a5fa;">🥉 Runway</span>
+                <span class="feature-tag" style="background: rgba(6, 182, 212, 0.2); border-color: #06b6d4; color: #22d3ee;">📌 HeyGen (للشروحات)</span>
+            </div>
+            <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">
+                <strong>💡 نصيحة:</strong> ابدأ بـ InVideo AI لأنه الأسهل، ثم انتقل إلى Runway أو Veo للحصول على جودة احترافية أعلى.
+            </p>
+        </div>
+
+        <div class="footer">
+            جميع الروابط تفتح في نافذة جديدة • آخر تحديث: يوليو 2026<br>
+            <a href="https://github.com/your-username/ai-gateway" target="_blank">مشروع مفتوح المصدر على GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.width = (Math.random() * 3 + 1) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
