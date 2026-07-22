@@ -85,7 +85,7 @@
 
 ```bash
 # استنساخ المشروع
-git clone https://github.com/your-username/ai-gateway.git
+git clone https://github.com/ProgDzOn/ai/
 
 # الدخول إلى المجلد
 cd ai-gateway
