@@ -10,7 +10,7 @@
 
 ## 🌐 الموقع المباشر
 
-🔗 [زيارة الموقع](https://your-username.github.io/ai-gateway)
+🔗 [زيارة الموقع](https://progdzon.github.io/ai)
 
 ---
 
