@@ -172,6 +172,27 @@
   .footer a{ color:var(--text-dim); text-decoration:none; }
   .footer a:hover{ color:var(--amber); }
 
+  /* ---------- developer credit ---------- */
+  .dev-credit{
+    margin-top:1.4rem; padding:1rem 1.4rem;
+    display:flex; align-items:center; justify-content:center; gap:.9rem; flex-wrap:wrap;
+    border:1px solid var(--line); border-radius:14px;
+    background:linear-gradient(155deg, rgba(46,230,166,.06), var(--panel));
+  }
+  .dev-credit .dev-info{ display:flex; align-items:center; gap:.6rem; font-family:var(--arabic); }
+  .dev-credit .dev-info b{ color:var(--text); font-weight:800; font-size:.92rem; }
+  .dev-credit .dev-info span{ color:var(--text-faint); font-size:.75rem; font-family:var(--mono); }
+  .dev-credit .wa-btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    padding:.55rem 1.1rem; border-radius:999px; text-decoration:none;
+    background:linear-gradient(135deg,#25d366,#128c7e); color:#fff;
+    font-weight:700; font-size:.85rem; font-family:var(--arabic);
+    box-shadow:0 4px 14px rgba(37,211,102,.28);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .dev-credit .wa-btn:hover{ transform:translateY(-2px); box-shadow:0 6px 18px rgba(37,211,102,.42); }
+  .dev-credit .wa-btn svg{ width:18px; height:18px; flex:none; }
+
   @media (max-width:640px){
     .pass{ flex-direction:column-reverse; }
     .pass-stub{
@@ -495,6 +516,17 @@
       جميع الروابط تفتح في نافذة جديدة • آخر تحديث: يوليو 2026<br>
       <a href="https://github.com/your-username/ai-gateway" target="_blank">مشروع مفتوح المصدر على GitHub</a>
     </footer>
+
+    <div class="dev-credit">
+      <div class="dev-info">
+        <b>👨‍💻 تطوير: ركاب عبدالقادر</b>
+        <span>0552656078</span>
+      </div>
+      <a class="wa-btn" href="https://wa.me/213552656078" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.77.46 3.44 1.27 4.89L2 22l5.25-1.27A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.1c-1.6 0-3.09-.46-4.34-1.24l-.31-.19-3.11.75.76-3.03-.2-.32A8.09 8.09 0 013.93 12c0-4.47 3.63-8.1 8.09-8.1 4.47 0 8.1 3.63 8.1 8.1s-3.63 8.1-8.1 8.1zm4.46-6.07c-.24-.12-1.44-.71-1.66-.79-.22-.08-.39-.12-.55.12-.16.24-.63.79-.78.95-.14.16-.28.18-.53.06-.24-.12-1.02-.38-1.95-1.21-.72-.64-1.2-1.44-1.35-1.68-.14-.24-.02-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42-.14 0-.31-.02-.47-.02-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z"/></svg>
+        تواصل عبر واتساب
+      </a>
+    </div>
   </div>
 </body>
 </html>
