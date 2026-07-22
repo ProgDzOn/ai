@@ -1,615 +1,498 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 بوابة الذكاء الاصطناعي | AI Gateway</title>
-    <meta name="description" content="بوابة شاملة لأفضل أدوات الذكاء الاصطناعي - مساعدات المحادثة ومنصات تحويل النص إلى فيديو">
-    <meta name="keywords" content="AI, ChatGPT, Gemini, Claude, DeepSeek, InVideo, Runway, ذكاء اصطناعي">
-    <meta name="author" content="AI Gateway">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✈ بوابة الذكاء الاصطناعي | AI Gateway</title>
+<meta name="description" content="بوابة شاملة لأفضل أدوات الذكاء الاصطناعي - مساعدات المحادثة ومنصات تحويل النص إلى فيديو">
+<meta name="keywords" content="AI, ChatGPT, Gemini, Claude, DeepSeek, InVideo, Runway, ذكاء اصطناعي">
+<meta name="author" content="AI Gateway">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#090b10;
+    --panel:#10141c;
+    --panel-2:#0c0f16;
+    --line:rgba(255,255,255,.09);
+    --line-strong:rgba(255,255,255,.16);
+    --amber:#ffb300;
+    --amber-soft:rgba(255,179,0,.14);
+    --green:#2ee6a6;
+    --text:#f2f1ec;
+    --text-dim:#9aa1ad;
+    --text-faint:#5b6270;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --arabic:'Cairo',sans-serif;
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--arabic);
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(255,179,0,.06), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    position:relative;
+  }
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background-image:repeating-linear-gradient(180deg, rgba(255,255,255,.012) 0px, rgba(255,255,255,.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:0;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--amber);color:#1a1204;}
 
-        body {
-            font-family: 'Cairo', 'Inter', sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            position: relative;
-        }
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
 
-        .particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .particle {
-            position: absolute;
-            width: 4px; height: 4px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 50%;
-            animation: float 15s infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
-        }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  }
 
-        .glow-orb {
-            position: fixed;
-            width: 700px; height: 700px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            animation: pulse-glow 4s ease-in-out infinite;
-        }
-        @keyframes pulse-glow {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
-        }
+  /* ---------- ticker ---------- */
+  .ticker{
+    position:relative; z-index:2;
+    background:#000; border-bottom:1px solid var(--line);
+    overflow:hidden; white-space:nowrap;
+    font-family:var(--mono);
+  }
+  .ticker-track{
+    display:inline-flex; gap:3.5rem;
+    padding:.5rem 0;
+    animation:ticker 38s linear infinite;
+  }
+  .ticker-track span{ color:var(--amber); font-size:.72rem; letter-spacing:.5px; }
+  .ticker-track span b{ color:var(--text-dim); font-weight:500; margin-inline-start:.6rem; }
+  @keyframes ticker{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 2rem 1rem;
-            max-width: 1200px;
-            width: 100%;
-        }
+  /* ---------- layout ---------- */
+  .wrap{ position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:2.4rem 1.4rem 3rem; }
 
-        .header {
-            margin-bottom: 2.5rem;
-            animation: fadeInDown 1s ease-out;
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .header h1 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-shadow: 0 0 50px rgba(99, 102, 241, 0.4);
-            margin-bottom: 0.5rem;
-            letter-spacing: -1px;
-        }
-        .header .subtitle {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.55);
-            font-weight: 400;
-        }
+  /* ---------- header ---------- */
+  .board-head{
+    display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem; flex-wrap:wrap;
+    padding-bottom:1.6rem; margin-bottom:2rem;
+    border-bottom:1px dashed var(--line-strong);
+  }
+  .brand{ display:flex; align-items:center; gap:1rem; }
+  .brand-mark{
+    width:56px; height:56px; border-radius:12px; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem;
+    background:linear-gradient(155deg, var(--amber-soft), transparent);
+    border:1px solid rgba(255,179,0,.35);
+    color:var(--amber);
+  }
+  .brand h1{
+    font-size:1.9rem; font-weight:900; letter-spacing:.5px; color:var(--text);
+  }
+  .brand h1 span{ color:var(--amber); }
+  .brand p{ color:var(--text-dim); font-size:.92rem; margin-top:.15rem; }
 
-        .section-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            margin: 2.5rem 0 1.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-        .section-title .line {
-            flex: 1;
-            max-width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-        }
-        .section-title .emoji {
-            font-size: 1.6rem;
-        }
+  .head-meta{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .clock{
+    font-family:var(--mono); font-size:1.3rem; font-weight:600; color:var(--amber);
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:.5rem .9rem; letter-spacing:2px; min-width:118px; text-align:center;
+  }
+  .status-pill{
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:rgba(46,230,166,.08); border:1px solid rgba(46,230,166,.3);
+    color:var(--green); font-family:var(--mono); font-size:.75rem; font-weight:600;
+    padding:.5rem .9rem; border-radius:8px; letter-spacing:.5px;
+  }
+  .status-pill .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--green);
+    box-shadow:0 0 8px var(--green); animation:blink 1.8s infinite;
+  }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
 
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.2rem;
-            margin-top: 1rem;
-        }
+  /* ---------- terminal section ---------- */
+  .terminal{ margin-bottom:2.6rem; }
+  .terminal-title{
+    display:flex; align-items:center; gap:.9rem; margin-bottom:1rem; flex-wrap:wrap;
+  }
+  .term-badge{
+    font-family:var(--mono); font-size:.72rem; font-weight:700; letter-spacing:1.5px;
+    color:#0d0a04; background:var(--amber); padding:.3rem .65rem; border-radius:5px;
+  }
+  .terminal-title h2{ font-size:1.25rem; font-weight:800; }
+  .term-count{
+    font-family:var(--mono); font-size:.75rem; color:var(--text-faint);
+    margin-inline-start:auto;
+  }
 
-        .card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 22px;
-            padding: 1.8rem 1.2rem;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            overflow: hidden;
-            animation: fadeInUp 0.8s ease-out backwards;
-            text-align: center;
-        }
+  .board{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .board-row{
+    display:grid;
+    grid-template-columns:74px 1.4fr 1.6fr 132px 152px;
+    align-items:center;
+    gap:1rem;
+    padding:1rem 1.3rem;
+    text-decoration:none;
+    color:var(--text);
+    border-top:1px solid var(--line);
+    transition:background .25s ease;
+    position:relative;
+  }
+  .board-row:first-child{ border-top:none; }
+  .board-row--head{
+    font-family:var(--mono); font-size:.68rem; color:var(--text-faint);
+    letter-spacing:1px; padding:.7rem 1.3rem; background:var(--panel-2);
+    text-transform:uppercase;
+  }
+  a.board-row:hover{ background:rgba(255,179,0,.05); }
+  a.board-row::before{
+    content:''; position:absolute; inset-inline-start:0; top:0; bottom:0; width:3px;
+    background:var(--accent,var(--amber)); opacity:.85;
+  }
 
-        .card:nth-child(1) { animation-delay: 0.05s; }
-        .card:nth-child(2) { animation-delay: 0.1s; }
-        .card:nth-child(3) { animation-delay: 0.15s; }
-        .card:nth-child(4) { animation-delay: 0.2s; }
-        .card:nth-child(5) { animation-delay: 0.25s; }
-        .card:nth-child(6) { animation-delay: 0.3s; }
-        .card:nth-child(7) { animation-delay: 0.35s; }
-        .card:nth-child(8) { animation-delay: 0.4s; }
-        .card:nth-child(9) { animation-delay: 0.45s; }
-        .card:nth-child(10) { animation-delay: 0.5s; }
-        .card:nth-child(11) { animation-delay: 0.55s; }
-        .card:nth-child(12) { animation-delay: 0.6s; }
-        .card:nth-child(13) { animation-delay: 0.65s; }
-        .card:nth-child(14) { animation-delay: 0.7s; }
-        .card:nth-child(15) { animation-delay: 0.75s; }
+  .cell.gate{
+    font-family:var(--mono); font-weight:700; font-size:1rem; color:var(--amber);
+    letter-spacing:1px;
+  }
+  .cell.gate em{ font-style:normal; }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  .cell.dest{ display:flex; align-items:center; gap:.7rem; min-width:0; }
+  .dest-icon{
+    width:38px; height:38px; border-radius:9px; flex:none;
+    display:flex; align-items:center; justify-content:center; font-size:1.05rem;
+    background:color-mix(in srgb, var(--accent,var(--amber)) 18%, transparent);
+    border:1px solid color-mix(in srgb, var(--accent,var(--amber)) 45%, transparent);
+  }
+  .dest-text{ min-width:0; }
+  .dest-text strong{ display:block; font-size:.98rem; font-weight:700; }
+  .dest-text small{
+    display:block; font-family:var(--mono); font-size:.68rem; color:var(--text-faint);
+    letter-spacing:.4px; margin-top:.1rem;
+  }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-            transition: left 0.6s ease;
-        }
-        .card:hover::before { left: 100%; }
+  .cell.desc{ font-size:.82rem; color:var(--text-dim); line-height:1.5; }
 
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
-        }
+  .cell.status{
+    font-family:var(--mono); font-size:.72rem; font-weight:600; color:var(--green);
+    display:flex; align-items:center; gap:.4rem; letter-spacing:.5px;
+  }
+  .cell.status .dot{
+    width:6px; height:6px; border-radius:50%; background:var(--green);
+    box-shadow:0 0 6px var(--green); animation:blink 2.2s infinite;
+  }
+  .cell.rating{ font-size:.85rem; color:var(--amber); letter-spacing:1px; }
 
-        /* Chat Assistants Colors */
-        .card.kimi    { border-top: 3px solid #6366f1; }
-        .card.kimi:hover    { box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2); }
-        .card.chatgpt { border-top: 3px solid #10a37f; }
-        .card.chatgpt:hover { box-shadow: 0 25px 50px rgba(16, 163, 127, 0.2); }
-        .card.deepseek{ border-top: 3px solid #2563eb; }
-        .card.deepseek:hover{ box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2); }
-        .card.claude  { border-top: 3px solid #d97757; }
-        .card.claude:hover  { box-shadow: 0 25px 50px rgba(217, 119, 87, 0.2); }
-        .card.gemini  { border-top: 3px solid #4285f4; }
-        .card.gemini:hover  { box-shadow: 0 25px 50px rgba(66, 133, 244, 0.2); }
-        .card.perplexity { border-top: 3px solid #22c55e; }
-        .card.perplexity:hover { box-shadow: 0 25px 50px rgba(34, 197, 94, 0.2); }
-        .card.copilot { border-top: 3px solid #0ea5e9; }
-        .card.copilot:hover { box-shadow: 0 25px 50px rgba(14, 165, 233, 0.2); }
-        .card.grok    { border-top: 3px solid #ef4444; }
-        .card.grok:hover    { box-shadow: 0 25px 50px rgba(239, 68, 68, 0.2); }
+  .cell.board-btn{
+    justify-self:end;
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-family:var(--mono); font-weight:600; font-size:.74rem;
+    color:var(--text); background:rgba(255,255,255,.05);
+    border:1px solid var(--line-strong); border-radius:7px;
+    padding:.5rem .7rem; transition:all .25s ease; white-space:nowrap;
+  }
+  a.board-row:hover .cell.board-btn{
+    background:var(--accent,var(--amber)); color:#0d0a04; border-color:transparent;
+  }
+  .cell.board-btn svg{ width:13px; height:13px; transition:transform .25s ease; }
+  a.board-row:hover .cell.board-btn svg{ transform:translateX(-3px); }
 
-        .card.veo     { border-top: 3px solid #8b5cf6; }
-        .card.veo:hover     { box-shadow: 0 25px 50px rgba(139, 92, 246, 0.2); }
-        .card.invideo { border-top: 3px solid #f59e0b; }
-        .card.invideo:hover { box-shadow: 0 25px 50px rgba(245, 158, 11, 0.2); }
-        .card.pika    { border-top: 3px solid #ec4899; }
-        .card.pika:hover    { box-shadow: 0 25px 50px rgba(236, 72, 153, 0.2); }
-        .card.runway  { border-top: 3px solid #3b82f6; }
-        .card.runway:hover  { box-shadow: 0 25px 50px rgba(59, 130, 246, 0.2); }
-        .card.heygen  { border-top: 3px solid #06b6d4; }
-        .card.heygen:hover  { box-shadow: 0 25px 50px rgba(6, 182, 212, 0.2); }
-        .card.synthesia { border-top: 3px solid #8b5cf6; }
-        .card.synthesia:hover { box-shadow: 0 25px 50px rgba(139, 92, 246, 0.2); }
-        .card.lumen5  { border-top: 3px solid #22c55e; }
-        .card.lumen5:hover  { box-shadow: 0 25px 50px rgba(34, 197, 94, 0.2); }
+  /* stagger flap-in */
+  .board-row{ opacity:0; animation:rowIn .5s ease forwards; }
+  .board-row--head{ opacity:1; animation:none; }
 
-        .card-icon {
-            width: 55px; height: 55px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 1.6rem;
-            font-weight: 900;
-            position: relative;
-            overflow: hidden;
-        }
+  @keyframes rowIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
 
-        .card.kimi .card-icon     { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
-        .card.chatgpt .card-icon  { background: linear-gradient(135deg, #10a37f, #19c59f); color: white; }
-        .card.deepseek .card-icon { background: linear-gradient(135deg, #2563eb, #3b82f6); color: white; }
-        .card.claude .card-icon   { background: linear-gradient(135deg, #d97757, #f4a261); color: white; }
-        .card.gemini .card-icon   { background: linear-gradient(135deg, #4285f4, #34a853); color: white; }
-        .card.perplexity .card-icon { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
-        .card.copilot .card-icon  { background: linear-gradient(135deg, #0ea5e9, #06b6d4); color: white; }
-        .card.grok .card-icon     { background: linear-gradient(135deg, #ef4444, #f97316); color: white; }
+  /* ---------- actions ---------- */
+  .actions{
+    display:flex; flex-wrap:wrap; gap:.9rem; justify-content:center;
+    margin:2.6rem 0 1rem;
+  }
+  .action-btn{
+    display:inline-flex; align-items:center; gap:.6rem;
+    padding:.85rem 1.8rem; border-radius:9px;
+    text-decoration:none; font-weight:700; font-size:.92rem;
+    border:1px solid var(--line-strong); background:var(--panel);
+    transition:all .3s ease;
+  }
+  .action-btn:hover{ border-color:var(--amber); background:var(--amber-soft); transform:translateY(-2px); }
+  .action-btn.primary{
+    background:linear-gradient(135deg, var(--amber), #ff8f00);
+    color:#1a1204; border-color:transparent;
+  }
+  .action-btn.primary:hover{ filter:brightness(1.08); transform:translateY(-2px); }
+  .action-btn svg{ width:18px; height:18px; }
 
-        .card.veo .card-icon      { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
-        .card.invideo .card-icon  { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
-        .card.pika .card-icon     { background: linear-gradient(135deg, #ec4899, #db2777); color: white; }
-        .card.runway .card-icon   { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; }
-        .card.heygen .card-icon   { background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; }
-        .card.synthesia .card-icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; }
-        .card.lumen5 .card-icon   { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+  /* ---------- footer ---------- */
+  .board-footer{
+    margin-top:2.5rem; padding-top:1.6rem; border-top:1px dashed var(--line-strong);
+    text-align:center; color:var(--text-faint); font-size:.78rem; line-height:1.9;
+    font-family:var(--mono);
+  }
+  .board-footer a{ color:var(--text-dim); text-decoration:none; }
+  .board-footer a:hover{ color:var(--amber); }
 
-        .card .rating {
-            display: inline-block;
-            font-size: 0.7rem;
-            color: #fbbf24;
-            letter-spacing: 1px;
-            margin-top: 0.2rem;
-        }
-
-        .card h2 {
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-        .card .company {
-            color: rgba(255, 255, 255, 0.35);
-            font-size: 0.7rem;
-            display: block;
-            margin-bottom: 0.4rem;
-        }
-        .card p {
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 0.78rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-        .card .btn-text {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-        }
-        .card:hover .btn-text {
-            color: #ffffff;
-            gap: 0.8rem;
-        }
-        .card .btn-text svg {
-            width: 16px; height: 16px;
-            transition: transform 0.3s ease;
-        }
-        .card:hover .btn-text svg { transform: translateX(-5px); }
-
-        .status {
-            position: absolute;
-            top: 0.8rem; left: 0.8rem;
-            width: 7px; height: 7px;
-            border-radius: 50%;
-            background: #22c55e;
-            box-shadow: 0 0 8px #22c55e;
-            animation: blink 2s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
-
-        .details-btn, .github-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.9rem 2rem;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 50px;
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-        }
-        .details-btn:hover, .github-btn:hover {
-            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-            border-color: rgba(255,255,255,0.3);
-            color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        .details-btn svg, .github-btn svg {
-            width: 20px; height: 20px;
-        }
-
-        .details-btn {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.1));
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-        .details-btn:hover {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.2));
-            border-color: rgba(99, 102, 241, 0.5);
-        }
-
-        .github-btn {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-            border-color: rgba(255, 255, 255, 0.08);
-        }
-        .github-btn:hover {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .footer {
-            margin-top: 2.5rem;
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 0.8rem;
-            line-height: 1.8;
-        }
-        .footer a {
-            color: rgba(255, 255, 255, 0.3);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .footer a:hover {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        @media (max-width: 768px) {
-            .header h1 { font-size: 2rem; }
-            .cards-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-            .card { padding: 1.2rem 0.8rem; }
-            .card h2 { font-size: 0.95rem; }
-            .card p { font-size: 0.7rem; }
-            .card-icon { width: 45px; height: 45px; font-size: 1.3rem; }
-            .section-title { font-size: 0.95rem; }
-        }
-
-        @media (max-width: 480px) {
-            .cards-grid { grid-template-columns: 1fr; }
-            .btn-group { flex-direction: column; align-items: center; }
-            .details-btn, .github-btn { width: 100%; justify-content: center; }
-        }
-
-        .deco-circle {
-            position: fixed;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            z-index: 0;
-            animation: rotate 30s linear infinite;
-        }
-        .deco-1 { width: 300px; height: 300px; top: 10%; right: 5%; }
-        .deco-2 { width: 200px; height: 200px; bottom: 15%; left: 8%; animation-direction: reverse; animation-duration: 25s; }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-    </style>
+  /* ---------- responsive ---------- */
+  @media (max-width:820px){
+    .board-row{ grid-template-columns:60px 1fr auto; grid-template-areas:"gate dest btn" "gate desc desc" "gate status status"; row-gap:.4rem; }
+    .board-row--head{ display:none; }
+    .cell.gate{ grid-area:gate; }
+    .cell.dest{ grid-area:dest; }
+    .cell.desc{ grid-area:desc; }
+    .cell.status, .cell.rating{ grid-area:status; }
+    .cell.board-btn{ grid-area:btn; }
+  }
+  @media (max-width:520px){
+    .board-head{ flex-direction:column; align-items:flex-start; }
+    .brand h1{ font-size:1.5rem; }
+    .clock{ font-size:1.1rem; }
+    .wrap{ padding:1.6rem 1rem 2.4rem; }
+  }
+</style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    <div class="glow-orb"></div>
-    <div class="deco-circle deco-1"></div>
-    <div class="deco-circle deco-2"></div>
 
-    <div class="container">
-        <div class="header">
-            <h1>🤖 بوابة الذكاء الاصطناعي</h1>
-            <p class="subtitle">جميع أدوات الذكاء الاصطناعي في مكان واحد - اختر وابدأ</p>
+  <div class="ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <span>✦ جميع الأنظمة تعمل بكفاءة <b>OPERATIONAL</b></span>
+      <span>✦ 15 وجهة متاحة عبر صالتين <b>TERMINAL A / B</b></span>
+      <span>✦ الأسعار والمزايا قابلة للتغيير من مزود الخدمة <b>NOTICE</b></span>
+      <span>✦ جميع الروابط تفتح في نافذة جديدة <b>INFO</b></span>
+      <span>✦ آخر تحديث للوحة: يوليو 2026 <b>UPDATED</b></span>
+      <span>✦ جميع الأنظمة تعمل بكفاءة <b>OPERATIONAL</b></span>
+      <span>✦ 15 وجهة متاحة عبر صالتين <b>TERMINAL A / B</b></span>
+      <span>✦ الأسعار والمزايا قابلة للتغيير من مزود الخدمة <b>NOTICE</b></span>
+      <span>✦ جميع الروابط تفتح في نافذة جديدة <b>INFO</b></span>
+      <span>✦ آخر تحديث للوحة: يوليو 2026 <b>UPDATED</b></span>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <header class="board-head">
+      <div class="brand">
+        <div class="brand-mark">✈</div>
+        <div>
+          <h1>AI <span>GATEWAY</span></h1>
+          <p>بوابة الذكاء الاصطناعي — اختر وجهتك وابدأ رحلتك</p>
+        </div>
+      </div>
+      <div class="head-meta">
+        <div class="clock" id="clock">--:--:--</div>
+        <div class="status-pill"><span class="dot"></span> كل الأنظمة تعمل</div>
+      </div>
+    </header>
+
+    <!-- TERMINAL A — CHAT ASSISTANTS -->
+    <section class="terminal">
+      <div class="terminal-title">
+        <span class="term-badge">TERMINAL A</span>
+        <h2>مساعدات المحادثة</h2>
+        <span class="term-count">8 وجهات متاحة</span>
+      </div>
+      <div class="board" id="boardA">
+        <div class="board-row board-row--head">
+          <span>البوابة</span><span>الوجهة</span><span>المزايا</span><span>الحالة</span><span></span>
         </div>
 
-        <!-- SECTION 1: AI CHAT ASSISTANTS -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">💬</span>
-            <span>مساعدات المحادثة</span>
-            <span class="line"></span>
+        <a href="https://www.kimi.com/?chat_enter_method=new_chat" target="_blank" class="board-row" style="--accent:#6366f1">
+          <span class="cell gate">A<em>01</em></span>
+          <span class="cell dest"><span class="dest-icon">🌙</span><span class="dest-text"><strong>Kimi</strong><small>MOONSHOT AI · KIM</small></span></span>
+          <span class="cell desc">معالجة مستندات طويلة حتى 2M حرف، بحث ويب مدمج</span>
+          <span class="cell status"><span class="dot"></span>ON TIME</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
+
+        <a href="https://chatgpt.com/" target="_blank" class="board-row" style="--accent:#10a37f">
+          <span class="cell gate">A<em>02</em></span>
+          <span class="cell dest"><span class="dest-icon">💬</span><span class="dest-text"><strong>ChatGPT</strong><small>OPENAI · GPT</small></span></span>
+          <span class="cell desc">محادثات ذكية، DALL·E 3، تحليل ملفات، GPTs مخصصة</span>
+          <span class="cell status"><span class="dot"></span>ON TIME</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
+
+        <a href="https://chat.deepseek.com/" target="_blank" class="board-row" style="--accent:#2563eb">
+          <span class="cell gate">A<em>03</em></span>
+          <span class="cell dest"><span class="dest-icon">🐋</span><span class="dest-text"><strong>DeepSeek</strong><small>DEEPSEEK AI · DSK</small></span></span>
+          <span class="cell desc">تفكير عميق R1، برمجة متقدمة، تكلفة منخفضة</span>
+          <span class="cell status"><span class="dot"></span>ON TIME</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
+
+        <a href="https://claude.ai/" target="_blank" class="board-row" style="--accent:#d97757">
+          <span class="cell gate">A<em>04</em></span>
+          <span class="cell dest"><span class="dest-icon">🎭</span><span class="dest-text"><strong>Claude</strong><small>ANTHROPIC · CLD</small></span></span>
+          <span class="cell desc">أفضل جودة كتابة، سياق 200K، Claude Code</span>
+          <span class="cell status"><span class="dot"></span>ON TIME</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
+
+        <a href="https://gemini.google.com/" target="_blank" class="board-row" style="--accent:#4285f4">
+          <span class="cell gate">A<em>05</em></span>
+          <span class="cell dest"><span class="dest-icon">✨</span><span class="dest-text"><strong>Gemini</strong><small>GOOGLE · GEM</small></span></span>
+          <span class="cell desc">مليون توكن سياق، تكامل Workspace، Veo &amp; Imagen</span>
+          <span class="cell status"><span class="dot"></span>ON TIME</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
+
+        <a href="https://www.perplexity.ai/" target="_blank" class="board-row" style="--accent:#22c55e">
+          <span class="cell gate">A<em>06</em></span>
+          <span class="cell dest"><span class="dest-icon">🔍</span><span class="dest-text"><strong>Perplexity</strong><small>PERPLEXITY AI · PPX</small></span></span>
+          <span class="cell desc">بحث ذكي باقتباسات، Pro Search، Model Council</span>
+          <span class="cell status"><span class="dot"></span>ON TIME</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
+
+        <a href="https://copilot.microsoft.com/" target="_blank" class="board-row" style="--accent:#0ea5e9">
+          <span class="cell gate">A<em>07</em></span>
+          <span class="cell dest"><span class="dest-icon">🛡️</span><span class="dest-text"><strong>Copilot</strong><small>MICROSOFT · COP</small></span></span>
+          <span class="cell desc">تكامل 365 وBing وEdge، وكلاء متعددون</span>
+          <span class="cell status"><span class="dot"></span>ON TIME</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
+
+        <a href="https://grok.com/" target="_blank" class="board-row" style="--accent:#ef4444">
+          <span class="cell gate">A<em>08</em></span>
+          <span class="cell dest"><span class="dest-icon">🚀</span><span class="dest-text"><strong>Grok</strong><small>XAI · GRK</small></span></span>
+          <span class="cell desc">بيانات X مباشرة، إجابات جريئة، وضع المرح</span>
+          <span class="cell status"><span class="dot"></span>ON TIME</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- TERMINAL B — VIDEO GENERATION -->
+    <section class="terminal">
+      <div class="terminal-title">
+        <span class="term-badge">TERMINAL B</span>
+        <h2>تحويل النص إلى فيديو</h2>
+        <span class="term-count">7 وجهات متاحة</span>
+      </div>
+      <div class="board" id="boardB">
+        <div class="board-row board-row--head">
+          <span>البوابة</span><span>الوجهة</span><span>المزايا</span><span>التقييم</span><span></span>
         </div>
 
-        <div class="cards-grid">
-            <a href="https://www.kimi.com/?chat_enter_method=new_chat" target="_blank" class="card kimi">
-                <div class="status"></div>
-                <div class="card-icon">🌙</div>
-                <h2>Kimi</h2>
-                <span class="company">Moonshot AI</span>
-                <p>معالجة مستندات طويلة</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
+        <a href="https://deepmind.google/technologies/veo/" target="_blank" class="board-row" style="--accent:#8b5cf6">
+          <span class="cell gate">B<em>01</em></span>
+          <span class="cell dest"><span class="dest-icon">🎥</span><span class="dest-text"><strong>Google Flow (Veo)</strong><small>GOOGLE DEEPMIND · VEO</small></span></span>
+          <span class="cell desc">أفضل جودة سينمائية، مشاهد واقعية بدقة عالية</span>
+          <span class="cell rating">⭐⭐⭐⭐⭐</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
 
-            <a href="https://chatgpt.com/" target="_blank" class="card chatgpt">
-                <div class="status"></div>
-                <div class="card-icon">💬</div>
-                <h2>ChatGPT</h2>
-                <span class="company">OpenAI</span>
-                <p>محادثات ذكية + DALL-E</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
+        <a href="https://invideo.io/" target="_blank" class="board-row" style="--accent:#f59e0b">
+          <span class="cell gate">B<em>02</em></span>
+          <span class="cell dest"><span class="dest-icon">🎞️</span><span class="dest-text"><strong>InVideo AI</strong><small>INVIDEO · INV</small></span></span>
+          <span class="cell desc">الأسهل، ينتج فيديو كامل تلقائياً، دعم العربية</span>
+          <span class="cell rating">⭐⭐⭐⭐⭐</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
 
-            <a href="https://chat.deepseek.com/" target="_blank" class="card deepseek">
-                <div class="status"></div>
-                <div class="card-icon">🐋</div>
-                <h2>DeepSeek</h2>
-                <span class="company">DeepSeek AI</span>
-                <p>تفكير عميق R1</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
+        <a href="https://pika.art/" target="_blank" class="board-row" style="--accent:#ec4899">
+          <span class="cell gate">B<em>03</em></span>
+          <span class="cell dest"><span class="dest-icon">✨</span><span class="dest-text"><strong>Pika</strong><small>PIKA LABS · PKA</small></span></span>
+          <span class="cell desc">مؤثرات بصرية جميلة، مثالي للمحتوى القصير</span>
+          <span class="cell rating">⭐⭐⭐⭐☆</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
 
-            <a href="https://claude.ai/" target="_blank" class="card claude">
-                <div class="status"></div>
-                <div class="card-icon">🎭</div>
-                <h2>Claude</h2>
-                <span class="company">Anthropic</span>
-                <p>أفضل كتابة + 200K</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
+        <a href="https://runwayml.com/" target="_blank" class="board-row" style="--accent:#3b82f6">
+          <span class="cell gate">B<em>04</em></span>
+          <span class="cell dest"><span class="dest-icon">🎬</span><span class="dest-text"><strong>Runway</strong><small>RUNWAY AI · RUN</small></span></span>
+          <span class="cell desc">إنتاج احترافي، Gen-2/Gen-3، إزالة خلفيات</span>
+          <span class="cell rating">⭐⭐⭐⭐⭐</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
 
-            <a href="https://gemini.google.com/" target="_blank" class="card gemini">
-                <div class="status"></div>
-                <div class="card-icon">✨</div>
-                <h2>Gemini</h2>
-                <span class="company">Google</span>
-                <p>مليون توكن سياق</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
+        <a href="https://www.heygen.com/" target="_blank" class="board-row" style="--accent:#06b6d4">
+          <span class="cell gate">B<em>05</em></span>
+          <span class="cell dest"><span class="dest-icon">🧑‍🏫</span><span class="dest-text"><strong>HeyGen</strong><small>HEYGEN · HEY</small></span></span>
+          <span class="cell desc">مقدم افتراضي، تعليق صوتي بالعربية</span>
+          <span class="cell rating">⭐⭐⭐⭐⭐</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
 
-            <a href="https://www.perplexity.ai/" target="_blank" class="card perplexity">
-                <div class="status"></div>
-                <div class="card-icon">🔍</div>
-                <h2>Perplexity</h2>
-                <span class="company">Perplexity AI</span>
-                <p>بحث ذكي باقتباسات</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
+        <a href="https://www.synthesia.io/" target="_blank" class="board-row" style="--accent:#8b5cf6">
+          <span class="cell gate">B<em>06</em></span>
+          <span class="cell dest"><span class="dest-icon">🤖</span><span class="dest-text"><strong>Synthesia</strong><small>SYNTHESIA · SYN</small></span></span>
+          <span class="cell desc">شخصيات افتراضية احترافية، 120+ لغة</span>
+          <span class="cell rating">⭐⭐⭐⭐⭐</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
 
-            <a href="https://copilot.microsoft.com/" target="_blank" class="card copilot">
-                <div class="status"></div>
-                <div class="card-icon">🛡️</div>
-                <h2>Copilot</h2>
-                <span class="company">Microsoft</span>
-                <p>تكامل 365 + Bing</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
+        <a href="https://lumen5.com/" target="_blank" class="board-row" style="--accent:#22c55e">
+          <span class="cell gate">B<em>07</em></span>
+          <span class="cell dest"><span class="dest-icon">📰</span><span class="dest-text"><strong>Lumen5</strong><small>LUMEN5 · LM5</small></span></span>
+          <span class="cell desc">تحويل مقالات لفيديو، مثالي لسوشيال ميديا</span>
+          <span class="cell rating">⭐⭐⭐⭐☆</span>
+          <span class="cell board-btn">زيارة الموقع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </a>
+      </div>
+    </section>
 
-            <a href="https://grok.com/" target="_blank" class="card grok">
-                <div class="status"></div>
-                <div class="card-icon">🚀</div>
-                <h2>Grok</h2>
-                <span class="company">xAI</span>
-                <p>بيانات X مباشرة</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
-        </div>
-
-        <!-- SECTION 2: VIDEO GENERATION -->
-        <div class="section-title">
-            <span class="line"></span>
-            <span class="emoji">🎬</span>
-            <span>تحويل النص إلى فيديو</span>
-            <span class="line"></span>
-        </div>
-
-        <div class="cards-grid">
-            <a href="https://deepmind.google/technologies/veo/" target="_blank" class="card veo">
-                <div class="status"></div>
-                <div class="card-icon">🎥</div>
-                <h2>Google Flow (Veo)</h2>
-                <span class="company">Google DeepMind</span>
-                <span class="rating">⭐⭐⭐⭐⭐</span>
-                <p>أفضل جودة سينمائية</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
-
-            <a href="https://invideo.io/" target="_blank" class="card invideo">
-                <div class="status"></div>
-                <div class="card-icon">🎞️</div>
-                <h2>InVideo AI</h2>
-                <span class="company">InVideo</span>
-                <span class="rating">⭐⭐⭐⭐⭐</span>
-                <p>أسهل أداة للمبتدئين</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
-
-            <a href="https://pika.art/" target="_blank" class="card pika">
-                <div class="status"></div>
-                <div class="card-icon">✨</div>
-                <h2>Pika</h2>
-                <span class="company">Pika Labs</span>
-                <span class="rating">⭐⭐⭐⭐☆</span>
-                <p>مؤثرات بصرية جميلة</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
-
-            <a href="https://runwayml.com/" target="_blank" class="card runway">
-                <div class="status"></div>
-                <div class="card-icon">🎬</div>
-                <h2>Runway</h2>
-                <span class="company">Runway AI</span>
-                <span class="rating">⭐⭐⭐⭐⭐</span>
-                <p>إنتاج احترافي</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
-
-            <a href="https://www.heygen.com/" target="_blank" class="card heygen">
-                <div class="status"></div>
-                <div class="card-icon">🧑‍🏫</div>
-                <h2>HeyGen</h2>
-                <span class="company">HeyGen</span>
-                <span class="rating">⭐⭐⭐⭐⭐</span>
-                <p>مقدم افتراضي بالعربية</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
-
-            <a href="https://www.synthesia.io/" target="_blank" class="card synthesia">
-                <div class="status"></div>
-                <div class="card-icon">🤖</div>
-                <h2>Synthesia</h2>
-                <span class="company">Synthesia</span>
-                <span class="rating">⭐⭐⭐⭐⭐</span>
-                <p>شخصيات افتراضية</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
-
-            <a href="https://lumen5.com/" target="_blank" class="card lumen5">
-                <div class="status"></div>
-                <div class="card-icon">📰</div>
-                <h2>Lumen5</h2>
-                <span class="company">Lumen5</span>
-                <span class="rating">⭐⭐⭐⭐☆</span>
-                <p>تحويل مقالات لفيديو</p>
-                <span class="btn-text">ابدأ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
-            </a>
-        </div>
-
-        <!-- BUTTONS -->
-        <div class="btn-group">
-            <a href="ai-details.html" class="details-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 16v-4M12 8h.01"/>
-                </svg>
-                📖 شرح تفصيلي لكل أداة
-            </a>
-            <a href="https://github.com/your-username/ai-gateway" target="_blank" class="github-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
-                ⭐ Star on GitHub
-            </a>
-        </div>
-
-        <div class="footer">
-            اضغط على أي بطاقة للانتقال إلى الموقع • جميع الروابط تفتح في نافذة جديدة<br>
-            <a href="https://github.com/your-username/ai-gateway" target="_blank">مشروع مفتوح المصدر</a> • آخر تحديث: يوليو 2026
-        </div>
+    <div class="actions">
+      <a href="ai-details.html" class="action-btn primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        بطاقات صعود تفصيلية لكل أداة
+      </a>
+      <a href="https://github.com/your-username/ai-gateway" target="_blank" class="action-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        Star on GitHub
+      </a>
     </div>
 
-    <script>
-        // Particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.width = (Math.random() * 3 + 1) + 'px';
-            particle.style.height = particle.style.width;
-            particlesContainer.appendChild(particle);
-        }
+    <footer class="board-footer">
+      اضغط على أي بوابة للانتقال إلى الموقع • جميع الروابط تفتح في نافذة جديدة<br>
+      <a href="https://github.com/your-username/ai-gateway" target="_blank">مشروع مفتوح المصدر</a> • آخر تحديث: يوليو 2026
+    </footer>
 
-        // Mouse parallax effect
-        document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('.card');
-            const x = (window.innerWidth / 2 - e.pageX) / 60;
-            const y = (window.innerHeight / 2 - e.pageY) / 60;
-            cards.forEach((card, index) => {
-                const factor = (index + 1) * 0.3;
-                card.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
-            });
-        });
-    </script>
+  </div>
+
+<script>
+  // live clock
+  function tick(){
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // split-flap scramble-in for gate codes on load
+  const FLAP_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  function flapIn(el, delay){
+    const final = el.textContent;
+    let frame = 0;
+    const totalFrames = 10;
+    setTimeout(() => {
+      const iv = setInterval(() => {
+        frame++;
+        if (frame >= totalFrames){
+          el.textContent = final;
+          clearInterval(iv);
+          return;
+        }
+        el.textContent = final.split('').map((ch) => {
+          if (ch === ' ' ) return ch;
+          return FLAP_CHARS[Math.floor(Math.random()*FLAP_CHARS.length)];
+        }).join('');
+      }, 35);
+    }, delay);
+  }
+
+  document.querySelectorAll('.board-row:not(.board-row--head)').forEach((row, i) => {
+    row.style.animationDelay = (i * 0.06) + 's';
+    const gate = row.querySelector('.cell.gate');
+    if (gate) flapIn(gate, 150 + i * 60);
+  });
+</script>
 </body>
 </html>
